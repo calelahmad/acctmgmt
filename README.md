@@ -3,8 +3,8 @@
 ## Development
 
 ```bash
-git clone https://github.com/shhdharmen/indepth-theming-material-components.git
-cd indepth-theming-material-components
+git clone https://github.com/calelahmad/acctmgmt.git
+cd acctmgmt
 npm i
 npm start
 ```
