@@ -1,0 +1,40 @@
+<h2 mat-dialog-title [attr.color]="data.themeColor">New Investment Account</h2>
+<div mat-dialog-content style="padding-top: 20px;">
+  <p>
+    <mat-form-field>
+      <mat-select
+        placeholder="Customer ID">
+        <mat-option *ngFor="let custnumelem of custnumrec"
+                    [value]="custnumelem.custNum"
+                    (click)="setCustNum(custnumelem)">{{custnumelem.custNum}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <p *ngIf="data.custName!==''">
+    <mat-form-field>
+      <mat-label>Customer Name</mat-label>
+      <input matInput [value]="data.custName" readonly>
+    </mat-form-field>
+  </p>
+  <p *ngIf="data.custName!==''">
+    <mat-form-field>
+      <mat-label>Investment ID</mat-label>
+      <input matInput [value]="data.invID" readonly>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <span matPrefix>RM &nbsp;</span>
+      <input type="text" [(ngModel)]="data.amount" [ngModelOptions]="{standalone: true}"  matInput>
+    </mat-form-field>
+  </p>
+    
+</div>
+<mat-dialog-actions align="end">
+  <button [color]="data.themeColor" 
+        [mat-dialog-close]="data"
+         mat-flat-button>Save</button>
+  <button mat-stroked-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

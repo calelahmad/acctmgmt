@@ -1,0 +1,39 @@
+<!-- src\app\app.component.html -->
+
+<app-sidenav #sidenav (featureSelected)="onNavigate($event)">
+  <div class="container">
+    <app-home *ngIf="contentElem.contentType==='home'"></app-home>
+    <app-saving-acct [titleName]="contentElem.contentTitle"
+                     [savingAcctList]="savingAcctList"
+                     *ngIf="contentElem.contentType==='saving-acct'">
+    </app-saving-acct>
+    <app-goals-acct [titleName]="contentElem.contentTitle"
+                    [goalsAcctList]="goalsAcctList"
+                     *ngIf="contentElem.contentType==='goals-acct'">
+    </app-goals-acct>
+    <app-investment-acct [titleName]="contentElem.contentTitle"
+                    [investmentAcctList]="investmentAcctList"
+                    [sidenav]="sidenav"
+                    (onNewInvestment)="onNewInvestment($event)"
+                    (onCloseInvestment)="onCloseInvestment($event)"
+                     *ngIf="contentElem.contentType==='investment-acct'">
+    </app-investment-acct>
+    <app-check-balance [titleName]="contentElem.contentTitle"
+                       [savingAcctList]="savingAcctList"
+                       [goalsAcctList]="goalsAcctList"
+                       [sidenav]="sidenav"
+                       *ngIf="contentElem.contentType==='check-balance'">
+    </app-check-balance>
+    
+
+    <!-- <h1 class="mat-display-3">Main Content</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nobis illum animi temporibus omnis.
+      Consequatur qui fugit facilis reiciendis deserunt, debitis beatae! Illo dolorem asperiores nisi excepturi eum
+      veritatis cupiditate.
+    </p>
+    <button mat-raised-button [color]="sidenav.themeColor" (click)="openDialog(sidenav.themeColor)">Open Dialog</button>
+    &nbsp;
+    <button mat-raised-button [color]="sidenav.themeColor" (click)="openNotification()">Open Notification</button> -->
+  </div>
+</app-sidenav>

@@ -1,0 +1,36 @@
+<p class="lbl-title">{{titleName}}</p>
+<div id="panel-form-userxmgmt">
+    <table mat-table [dataSource]="savingAcctList" style="width: 100%;">
+        <ng-container matColumnDef="custnum">
+          <th mat-header-cell *matHeaderCellDef class="clmappt"> Customer ID</th>
+          <td mat-cell *matCellDef="let element" 
+          [ngClass]="(selectedAcct == element.custNum)?'cell-caption1':'cell-caption2'">
+           {{element.custNum}} </td>
+        </ng-container>
+        <ng-container matColumnDef="custname">
+            <th mat-header-cell *matHeaderCellDef class="clmappt"> Customer Name</th>
+            <td mat-cell *matCellDef="let element"
+            [ngClass]="(selectedAcct == element.custNum)?'cell-caption1':'cell-caption2'">
+            {{element.custName}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acctnum">
+            <th mat-header-cell *matHeaderCellDef class="clmappt"> Saving Account Number </th>
+            <td mat-cell *matCellDef="let element"
+            [ngClass]="(selectedAcct == element.custNum)?'cell-caption1':'cell-caption2'">
+            {{element.acctNum}} </td>
+          </ng-container>
+        <ng-container matColumnDef="totbalance">
+            <th mat-header-cell *matHeaderCellDef class="clmappt"> Total Balance</th>
+            <td mat-cell *matCellDef="let element"
+            [ngClass]="(selectedAcct == element.custNum)?'cell-caption1':'cell-caption2'">
+            {{element.totBalance | currency:'RM '}}
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+        <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            [ngClass]="{'highlight': selectedAcct == row.custNum}"
+            (click)="highlight(row)"></tr>
+    </table>
+</div>

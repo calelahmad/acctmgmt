@@ -1,0 +1,56 @@
+<div class="lbl-select">
+    <p>Please enter the customer ID that you want to check balance</p>
+    <form class="chk-bal-form">
+        <mat-form-field class="chk-bal-width" appearance="outline" [color]="sidenav.themeColor" >
+            <mat-label>Customer ID</mat-label>
+            <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="searchKey">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let savingAcctList of filteredOptions | async" [value]="savingAcctList.custNum">
+                {{savingAcctList.custNum}}
+            </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button ngClass="lbl-search" [color]="sidenav.themeColor" 
+                (click)="chkBalance()">Check Account Balance</button>
+    </form>
+    <div id="panel-acct" *ngIf="showDetails">
+        <p class="lbl-acct">Saving Account Details</p>
+        <table style="width:100%">
+            <tr>
+              <td style="text-align: center">
+                <p class="lbl-caption">Customer Name</p>
+                <p class="lbl-value">{{chckBalDetails.custName}}</p>
+              </td>
+              <td style="text-align: center">
+                <p class="lbl-caption">Saving Account Number</p>
+                <p class="lbl-value">{{chckBalDetails.savingAcctNum}}</p>
+              </td>
+              <td style="text-align: center"> 
+                <p class="lbl-caption">Total Balance</p>
+                <p class="lbl-value">{{chckBalDetails.savingTotalBal | currency:'RM '}}</p>
+              </td>
+            </tr>
+          </table>
+    </div>
+    <div id="panel-acct" *ngIf="showDetails">
+        <p class="lbl-acct">Goals Account Details</p>
+        <table style="width:100%">
+            <tr>
+              <td style="text-align: center">
+                <p class="lbl-caption">Customer Name</p>
+                <p class="lbl-value">{{chckBalDetails.custName}}</p>
+              </td>
+              <td style="text-align: center">
+                <p class="lbl-caption">Goals Account Number</p>
+                <p class="lbl-value">{{chckBalDetails.goalsAcctNum}}</p>
+              </td>
+              <td style="text-align: center"> 
+                <p class="lbl-caption">Total Balance</p>
+                <p class="lbl-value">{{chckBalDetails.goalsTotalBal | currency:'RM '}}</p>
+              </td>
+            </tr>
+          </table>
+    </div>
+    
+</div>
+
