@@ -1,5 +1,10 @@
-<h2 mat-dialog-title [attr.color]="data.themeColor">New Investment Account</h2>
-<div mat-dialog-content style="padding-top: 20px;">
+<h2 *ngIf="data.action !== 'confirm_transfer'" mat-dialog-title [attr.color]="data.themeColor">
+  {{(data.action === 'new_investment')?'New Investment Account':'Close Investment Account'}}
+</h2>
+<h2 *ngIf="data.action === 'confirm_transfer'"mat-dialog-title [attr.color]="data.themeColor">
+  SUCCESS
+</h2>
+<div *ngIf="data.action === 'new_investment'" style="padding-top: 20px;">
   <p>
     <mat-form-field>
       <mat-select
@@ -30,11 +35,35 @@
       <input type="text" [(ngModel)]="data.amount" [ngModelOptions]="{standalone: true}"  matInput>
     </mat-form-field>
   </p>
-    
 </div>
+<div *ngIf="data.action === 'close_investment'" style="padding-top: 20px;">
+  <p class="lbl-close-inv">
+    Are you sure you want to close the investment account? 
+  </p>
+  <mat-divider style="padding-bottom: 10px;"></mat-divider>
+  <p class="lbl-close-inv">
+    Investment Account Number : <span style="font-weight:bold;">{{data.invID}}</span>
+  </p>
+  <p class="lbl-close-inv">
+    Customer Name : <span style="font-weight:bold;">{{data.custName}}</span>
+  </p>
+  <mat-divider style="padding-bottom: 10px;"></mat-divider>
+  <p class="lbl-close-inv">
+    After the investment account is closed, the amount <span style="font-weight:bold;">{{data.amount  | currency:'RM '}}</span> 
+    in the investment account will be transfered to the saving account for customer ID :   
+    <span style="font-weight:bold;">{{data.custID}}</span> 
+  </p>
+</div>
+<div *ngIf="data.action === 'confirm_transfer'" style="padding-top: 20px;">
+  <p class="lbl-close-inv">
+    Money Successfully Transfered 
+  </p>
+</div>
+
 <mat-dialog-actions align="end">
-  <button [color]="data.themeColor" 
+  <button *ngIf="data.action !== 'confirm_transfer'" [color]="data.themeColor" 
         [mat-dialog-close]="data"
-         mat-flat-button>Save</button>
-  <button mat-stroked-button mat-dialog-close>Close</button>
+         mat-flat-button>{{(data.action === 'new_investment'|| data.action !== 'confirm_transfer')?'Save':'Yes'}}</button>
+  <button *ngIf="data.action !== 'confirm_transfer'" mat-stroked-button mat-dialog-close>{{(data.action === 'new_investment')?'Close':'No'}}</button>
+  <button *ngIf="data.action === 'confirm_transfer'" [color]="data.themeColor"  mat-flat-button mat-dialog-close>OK</button>
 </mat-dialog-actions>

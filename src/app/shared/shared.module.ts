@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SidenavComponent, DialogComponent],

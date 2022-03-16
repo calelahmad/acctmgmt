@@ -36,7 +36,7 @@
             <th mat-header-cell *matHeaderCellDef class="clmcloseacct"></th>
             <td mat-cell *matCellDef="let element">
                 <button mat-flat-button [color]="sidenav.themeColor"
-                        (click)="showAcctDetails(element)">Close Investment Account</button>
+                        (click)="CloseInvAcct(element,sidenav.themeColor)">Close Investment Account</button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>

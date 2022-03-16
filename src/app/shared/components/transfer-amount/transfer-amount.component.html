@@ -1,0 +1,111 @@
+<p class="lbl-title">{{titleName}}</p>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step *ngFor="let stepelem of trasferSteps;" >
+      <form *ngIf="stepelem === 'from-saving'" [formGroup]="firstFormGroup" >
+        <ng-template matStepLabel>Choose Saving Account</ng-template>
+            <div *ngIf="stepelem === 'from-saving'" class="lbl-select">
+                <p>Please choose the saving account base on customer ID</p>
+                <form class="chk-bal-form" >
+                    <mat-form-field class="chk-bal-width" appearance="outline" [color]="sidenav.themeColor" >
+                        <mat-label>Customer ID</mat-label>
+                        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="searchKey">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let savingAcctList of filteredOptions | async" [value]="savingAcctList.custNum">
+                            {{savingAcctList.custNum}}
+                        </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <button mat-raised-button ngClass="lbl-search" [color]="sidenav.themeColor" 
+                            (click)="chkBalance()">View Saving Account Details</button>
+                </form>
+                <div id="panel-acct" *ngIf="showDetails">
+                    <p class="lbl-acct">Saving Account Details</p>
+                    <table style="width:100%">
+                        <tr>
+                          <td style="text-align: center">
+                            <p class="lbl-caption">Customer Name</p>
+                            <p class="lbl-value">{{chckBalDetails.custName}}</p>
+                          </td>
+                          <td style="text-align: center">
+                            <p class="lbl-caption">Saving Account Number</p>
+                            <p class="lbl-value">{{chckBalDetails.savingAcctNum}}</p>
+                          </td>
+                          <td style="text-align: center"> 
+                            <p class="lbl-caption">Total Balance</p>
+                            <p class="lbl-value">{{chckBalDetails.savingTotalBal | currency:'RM '}}</p>
+                          </td>
+                        </tr>
+                      </table>
+                </div>
+            </div>
+            <button *ngIf="showDetails" mat-stroked-button ngClass="lbl-search" [color]="sidenav.themeColor" 
+                    (click)="gotoNext()">Next<span style="padding-left: 10px;"><mat-icon>
+                        keyboard_double_arrow_right
+                      </mat-icon></span></button>
+      </form>
+      <form *ngIf="stepelem === 'to-goals'">
+        <ng-template matStepLabel>Choose Goals Account</ng-template>
+        <div *ngIf="stepelem === 'to-goals'" class="lbl-select">
+            <p>Please choose the saving account base on customer ID</p>
+            <form class="chk-bal-form" >
+                <mat-form-field class="chk-bal-width" appearance="outline" [color]="sidenav.themeColor" >
+                    <mat-label>Customer ID</mat-label>
+                    <input type="text" matInput [formControl]="myControl2" [matAutocomplete]="auto" [(ngModel)]="searchKey">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let goalsAcctList of filteredOptions2 | async" [value]="goalsAcctList.custNum">
+                        {{goalsAcctList.custNum}}
+                    </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <button mat-raised-button ngClass="lbl-search" [color]="sidenav.themeColor" 
+                        (click)="chkBalance()">View Goals Account Details</button>
+            </form>
+            <div id="panel-acct" *ngIf="showDetails">
+                <p class="lbl-acct">Goals Account Details</p>
+                <table style="width:100%">
+                    <tr>
+                      <td style="text-align: center">
+                        <p class="lbl-caption">Customer Name</p>
+                        <p class="lbl-value">{{chckBalDetails.custName}}</p>
+                      </td>
+                      <td style="text-align: center">
+                        <p class="lbl-caption">Goals Account Number</p>
+                        <p class="lbl-value">{{chckBalDetails.goalsAcctNum}}</p>
+                      </td>
+                      <td style="text-align: center"> 
+                        <p class="lbl-caption">Total Balance</p>
+                        <p class="lbl-value">{{chckBalDetails.goalsTotalBal | currency:'RM '}}</p>
+                      </td>
+                    </tr>
+                  </table>
+            </div>
+        </div>
+        <button *ngIf="showDetails" mat-stroked-button ngClass="lbl-search" [color]="sidenav.themeColor" 
+                (click)="gotoNext()">Next<span style="padding-left: 10px;"><mat-icon>
+                    keyboard_double_arrow_right
+                  </mat-icon></span></button>
+      </form>
+      <form *ngIf="stepelem === 'transfer-money'">
+        <ng-template matStepLabel>Transfer from Saving to Goals account</ng-template>
+        <div *ngIf="stepelem === 'transfer-money'" class="lbl-select">
+            <p style="padding-bottom: 20px;">Please confirm the details money transfer.</p>
+            <p>Transfer from Saving Account : <span style="font-weight:bold;">{{chckBalDetails.savingAcctNum}}</span>
+               to Goals Account : <span style="font-weight:bold;">{{chckBalDetails.goalsAcctNum}}</span></p>
+        </div>
+        <button mat-raised-button ngClass="lbl-search" [color]="sidenav.themeColor" 
+                (click)="doMoneyTransfer(sidenav.themeColor)">Transfer the Money</button>
+      </form>
+    </mat-step>
+    <!-- <mat-step [stepControl]="secondFormGroup">
+      
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Transfer from Saving to Goals account</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step> -->
+  </mat-horizontal-stepper>
+  

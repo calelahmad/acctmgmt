@@ -25,11 +25,15 @@ export class InvestmentAcctComponent implements OnInit {
   }
 
   openDialog(themeColor: 'primary' | 'accent' | 'warn'): void {
+    let newRandomNum = Math.floor((Math.random() * 100) + 1);
+    let newInvID = 'IA-'+("000"+(newRandomNum)).slice(-4); 
+
     const dialogRef = this.dialog.open(DialogComponent, {
       panelClass: 'custom-dialog',
       data: {
+        action:'new_investment',
         themeColor,
-        invID:'IA-0009',
+        invID:newInvID,
         custID:'',
         custName:'',
         amount:''
@@ -49,7 +53,23 @@ export class InvestmentAcctComponent implements OnInit {
     });
   }
 
-  showAcctDetails(elemAcctDetails) {
-    this.onCloseInvestment.emit(elemAcctDetails);
+  CloseInvAcct(elemAcctDetails,themeColor: 'primary' | 'accent' | 'warn') {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      panelClass: 'custom-dialog',
+      width:'35%',
+      data: {
+        action:'close_investment',
+        themeColor,
+        invID:elemAcctDetails.acctNum,
+        custID:elemAcctDetails.custNum,
+        custName:elemAcctDetails.custName,
+        amount:elemAcctDetails.totBalance
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== '') { //yes is selected
+        this.onCloseInvestment.emit(elemAcctDetails);
+      }
+    });
   }
 }

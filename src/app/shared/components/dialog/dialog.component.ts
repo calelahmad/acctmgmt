@@ -36,6 +36,7 @@ export class DialogComponent implements OnInit {
 }
 
 export interface DialogData {
+  action:string;
   themeColor: string;
   invID: string;
   custID: string;

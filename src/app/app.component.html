@@ -24,6 +24,12 @@
                        [sidenav]="sidenav"
                        *ngIf="contentElem.contentType==='check-balance'">
     </app-check-balance>
+    <app-transfer-amount [titleName]="contentElem.contentTitle"
+                         [savingAcctList]="savingAcctList"
+                         [goalsAcctList]="goalsAcctList"
+                         [sidenav]="sidenav"
+                         *ngIf="contentElem.contentType==='transfer-money'">
+    </app-transfer-amount>
     
 
     <!-- <h1 class="mat-display-3">Main Content</h1>
