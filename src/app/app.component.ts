@@ -13,7 +13,7 @@ export interface SavingAcctList {
 }
 
 const SAVING_ACCT_DATA: SavingAcctList[] = [ //sample data
-   {acctNum: 'SA-0001', custNum: '730201-02-3948', custName: 'Abu Bakar', totBalance: '5000'},
+   {acctNum: 'SA-0001', custNum: '730201-02-3948', custName: 'Abuar', totBalance: '5000'},
    {acctNum: 'SA-0002', custNum: '820406-01-3346', custName: 'Umar Khatab', totBalance: '10400'},
    {acctNum: 'SA-0003', custNum: '760211-01-7764', custName: 'Bilal Rabah', totBalance: '450'},
    {acctNum: 'SA-0004', custNum: '734571-12-7348', custName: 'Ahmad Albab', totBalance: '5992'},
